@@ -13,8 +13,6 @@
  * **********************************************
  */
 
-
-
 const { Client, GatewayIntentBits, ActivityType, TextChannel } = require('discord.js');
 require('dotenv').config();
 const express = require('express');
@@ -35,12 +33,10 @@ app.listen(port, () => {
   console.log(`🔗 Powered By RTX`);
 });
 
-
-const statusMessages = ["PLAYING Il Bunker"];
-
+const statusMessages = ["sta giocando a Il Bunker"];
 
 let currentIndex = 0;
-const channelId = '';
+const channelId = ''; // Inserisci l'ID del canale qui
 
 async function login() {
   try {
@@ -56,6 +52,7 @@ async function login() {
  ██████╗░████████╗██╗░░██╗           
  ██╔══██╗╚══██╔══╝╚██╗██╔╝          
  ██████╔╝░░░██║░░░░╚███╔╝░          
+ ██╔══██╗░░░██║░░░░
  ██╔══██╗░░░██║░░░░██╔██╗░          
  ██║░░██║░░░██║░░░██╔╝╚██╗          
  ╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝          
@@ -67,33 +64,29 @@ GIT : https://github.com/RTX-GAMINGG/Bot-ghost-status-remover-by-RTX
  * **********************************************
  */
 
-
 function updateStatusAndSendMessages() {
   const currentStatus = statusMessages[currentIndex];
-  const nextStatus = statusMessages[(currentIndex + 1) % statusMessages.length];
 
   client.user.setPresence({
-    activities: [{ name: currentStatus, type: ActivityType.Custom}],
+    activities: [{ name: currentStatus, type: ActivityType.Playing }], // Tipo di attività impostato su 'Playing'
     status: 'dnd',
   });
 
-  
   const textChannel = client.channels.cache.get(channelId);
 
   if (textChannel instanceof TextChannel) {
-   
-    textChannel.send(`Bot status is: ${currentStatus}`);
+    textChannel.send(`Lo stato del bot è: ${currentStatus}`);
   } else {
-
+    console.log('Canale non trovato o non è un TextChannel');
   }
 
   currentIndex = (currentIndex + 1) % statusMessages.length;
 }
 
 client.once('ready', () => {
-  console.log(`\x1b[36m%s\x1b[0m`, `|    ✅ Bot is ready as ${client.user.tag}`);
-  console.log(`\x1b[36m%s\x1b[0m`, `|    ✨HAPPY NEW YEAR MY DEAR FAMILY`);
-  console.log(`\x1b[36m%s\x1b[0m`, `|    ❤️WELCOME TO 2024`);
+  console.log(`\x1b[36m%s\x1b[0m`, `|    ✅ Bot è pronto come ${client.user.tag}`);
+  console.log(`\x1b[36m%s\x1b[0m`, `|    ✨BUON ANNO NUOVO ALLA MIA CARA FAMIGLIA`);
+  console.log(`\x1b[36m%s\x1b[0m`, `|    ❤️BENVENUTI NEL 2024`);
   updateStatusAndSendMessages();
 
   setInterval(() => {
