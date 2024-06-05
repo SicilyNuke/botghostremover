@@ -33,7 +33,7 @@ app.listen(port, () => {
   console.log(`🔗 Powered By RTX`);
 });
 
-const statusMessages = ["Il Bunker"];
+const statusMessages = ["IlBunker"];
 
 let currentIndex = 0;
 const channelId = ''; // Inserisci l'ID del canale qui
